@@ -61,7 +61,7 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className} relative`}
     >
-      <p>Query: {query}</p>
+      {/* <p>Query: {query}</p> */}
       <form
         className="flex flex-col items-center justify-center"
         onSubmit={handleSubmit}
@@ -71,9 +71,7 @@ export default function Home() {
         <button type="submit">Submit!!</button>
       </form>
       <div className="w-auto">
-        {!images?.length ? (
-          <p>No results.</p>
-        ) : (
+        {!images?.length ? null : (
           <div className="grid gap-4 grid-cols-4 grid-rows-4">
             {images.map((img) => (
               <img
@@ -86,7 +84,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      <p className="fixed top-0 left-0">Current Page: {currentPage}</p>
+      {/* <p className="fixed top-0 left-0">Current Page: {currentPage}</p> */}
       <ImageModal
         isVisible={isModalOpen}
         image={currentImage}
