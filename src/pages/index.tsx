@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BaseSyntheticEvent } from 'react';
 import { Inter } from 'next/font/google';
+import { toast } from 'react-toastify';
 
 import Head from 'next/head';
 import Image from 'next/image';
@@ -29,10 +30,12 @@ export default function Home() {
 
   useEffect(() => {
     if (isAtBottom) {
+      if (!nextPage) {
+        toast('Reached end of image results.');
+        return;
+      }
       // fetch next page
       const callFetch = async () => {
-        if (!nextPage) return alert('reached end of images');
-
         const data = await fetchPixabay({
           query,
           currentPage: nextPage
@@ -53,7 +56,7 @@ export default function Home() {
 
       callFetch();
     }
-  }, [isAtBottom, images, nextPage, query]);
+  }, [isAtBottom]);
 
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
