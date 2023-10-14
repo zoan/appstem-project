@@ -19,7 +19,7 @@ export type PixabayImage = {
   imageHeight: number;
   imageSize: number;
   views: number;
-  downloads: 6439;
+  downloads: number;
   likes: number;
   comments: number;
   user_id: number;
