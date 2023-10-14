@@ -31,7 +31,9 @@ export default function Home() {
   useEffect(() => {
     if (isAtBottom) {
       if (!nextPage) {
-        toast('Reached end of image results.');
+        toast.info(
+          `Reached end of image results for: "${query}". Displaying ${images.length} results.`
+        );
         return;
       }
       // fetch next page
