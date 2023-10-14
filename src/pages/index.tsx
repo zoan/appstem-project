@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { BaseSyntheticEvent } from "react";
-import { Inter } from "next/font/google";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { BaseSyntheticEvent } from 'react';
+import { Inter } from 'next/font/google';
 
-import { ImageModal } from "@/components/ImageModal/ImageModal";
+import { ImageModal } from '@/components/ImageModal/ImageModal';
 
-import { fetchPixabay } from "@/utils/helpers";
-import { useScrollHelpers } from "../utils/hooks";
-import { PixabayImage } from "@/utils/types";
+import { fetchPixabay } from '@/utils/helpers';
+import { useScrollHelpers } from '../utils/hooks';
+import { PixabayImage } from '@/utils/types';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [images, setImages] = useState<PixabayImage[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState("");
+  const [currentImage, setCurrentImage] = useState('');
 
   const { isAtBottom } = useScrollHelpers();
 
@@ -26,7 +26,7 @@ export default function Home() {
       const callFetch = async () => {
         const data = await fetchPixabay({
           query,
-          currentPage: currentPage + 1,
+          currentPage: currentPage + 1
         });
 
         setCurrentPage(currentPage + 1);
@@ -52,7 +52,7 @@ export default function Home() {
     setImages(data?.hits);
   };
 
-  const handleImageClick = ({ imageUrl = "" }) => {
+  const handleImageClick = ({ imageUrl = '' }) => {
     setCurrentImage(imageUrl);
     setIsModalOpen(true);
   };
@@ -62,10 +62,7 @@ export default function Home() {
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className} relative`}
     >
       {/* <p>Query: {query}</p> */}
-      <form
-        className="flex flex-col items-center justify-center"
-        onSubmit={handleSubmit}
-      >
+      <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
         <label>Search</label>
         <input />
         <button type="submit">Submit!!</button>
@@ -73,12 +70,15 @@ export default function Home() {
       <div className="w-auto">
         {!images?.length ? null : (
           <div className="grid gap-4 grid-cols-4 grid-rows-4">
-            {images.map((img) => (
-              <img
+            {images.map(img => (
+              <Image
                 onClick={() => handleImageClick({ imageUrl: img.webformatURL })}
                 className="cursor-pointer"
                 key={img.webformatURL}
                 src={img.webformatURL}
+                alt={img.tags}
+                width="300"
+                height="300"
               />
             ))}
           </div>
