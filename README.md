@@ -18,6 +18,7 @@
 - ~~select an image search API to use~~
 - ~~create account and retrieve API key from image search API~~
 - ~~fetch data from the API~~
+- ~~store API key in an env variable~~
 - create a middleware layer to help with frontend consumption
   - paginated
 
@@ -28,9 +29,9 @@
 
 ### Deployment / Deliverables
 
-- host project on vercel
+- ~~host project on vercel~~
 - make github repo public
-- set up env variables
+- ~~set up env variables~~
 - send deployed project link and github repo link to Robert by end of day Sunday
 
 ### Misc
