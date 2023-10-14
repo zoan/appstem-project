@@ -23,8 +23,8 @@
 - ~~create account and retrieve API key from image search API~~
 - ~~fetch data from the API~~
 - ~~store API key in an env variable~~
-- create a middleware layer to help with frontend consumption
-  - paginated
+- ~~create a middleware layer to help with frontend consumption~~
+  - ~~paginated~~
 
 ### Testing / Error Handling
 

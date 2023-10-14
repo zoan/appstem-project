@@ -32,3 +32,14 @@ export type PixabayGetResponse = {
   totalHits: number;
   hits: Array<PixabayImage>;
 };
+
+export type PixabayMiddlewareResponse = {
+  query: string;
+  currentPage: number;
+  previousPage: number;
+  nextPage: number;
+  perPage: number;
+  totalResults: number;
+  totalPages: number;
+  images: Array<PixabayImage>;
+};

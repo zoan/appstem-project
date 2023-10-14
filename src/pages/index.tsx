@@ -12,25 +12,41 @@ import { PixabayImage } from '@/utils/types';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const [query, setQuery] = useState('');
+  // image search state
+  const [query, setQuery] = useState<string>('');
   const [images, setImages] = useState<PixabayImage[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [previousPage, setPreviousPage] = useState<number>(1);
+  const [nextPage, setNextPage] = useState<number>(1);
+
+  // image modal state
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [currentImage, setCurrentImage] = useState<string>('');
 
   const { isAtBottom } = useScrollHelpers();
 
   useEffect(() => {
     if (isAtBottom) {
-      // fetch next set
+      // fetch next page
       const callFetch = async () => {
+        if (!nextPage) return alert('reached end of images');
+
         const data = await fetchPixabay({
           query,
-          currentPage: currentPage + 1
+          currentPage: nextPage
         });
 
-        setCurrentPage(currentPage + 1);
-        setImages([...images, ...data?.hits]);
+        const {
+          currentPage: newCurrentPage,
+          previousPage: newPreviousPage,
+          nextPage: newNextPage,
+          images: newImages = []
+        } = data || {};
+
+        setCurrentPage(newCurrentPage);
+        setPreviousPage(newPreviousPage);
+        setNextPage(newNextPage);
+        setImages([...images, ...newImages]);
       };
 
       callFetch();
@@ -45,11 +61,20 @@ export default function Home() {
     // start on page 1 with each new search
     const data = await fetchPixabay({ query: searchQuery, currentPage: 1 });
 
-    // update the state
-    setQuery(searchQuery);
-    setCurrentPage(1);
+    const {
+      query,
+      currentPage: newCurrentPage,
+      previousPage: newPreviousPage,
+      nextPage: newNextPage,
+      images
+    } = data || {};
 
-    setImages(data?.hits);
+    // update the state
+    setQuery(query);
+    setCurrentPage(newCurrentPage);
+    setPreviousPage(newPreviousPage);
+    setNextPage(newNextPage);
+    setImages(images);
   };
 
   const handleImageClick = ({ imageUrl = '' }) => {
