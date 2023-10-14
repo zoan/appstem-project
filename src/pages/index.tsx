@@ -3,6 +3,8 @@ import Image from "next/image";
 import { BaseSyntheticEvent } from "react";
 import { Inter } from "next/font/google";
 
+import { ImageModal } from "@/components/ImageModal/ImageModal";
+
 import { useDetectPageBottom } from "../utils/hooks";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,6 +29,8 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [images, setImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
 
   const { isAtBottom } = useDetectPageBottom();
 
@@ -67,9 +71,14 @@ export default function Home() {
     setImages(data?.hits);
   };
 
+  const handleImageClick = ({ imageUrl }) => {
+    setCurrentImage(imageUrl);
+    setIsModalOpen(true);
+  };
+
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className} relative`}
     >
       <p>Query: {query}</p>
       <form
@@ -86,12 +95,22 @@ export default function Home() {
         ) : (
           <div className="grid gap-4 grid-cols-4 grid-rows-4">
             {images.map((img) => (
-              <img key={img.webformatURL} src={img.webformatURL} />
+              <img
+                onClick={() => handleImageClick({ imageUrl: img.webformatURL })}
+                className="cursor-pointer"
+                key={img.webformatURL}
+                src={img.webformatURL}
+              />
             ))}
           </div>
         )}
       </div>
       <p className="fixed top-0 left-0">Current Page: {currentPage}</p>
+      <ImageModal
+        isVisible={isModalOpen}
+        image={currentImage}
+        closeModal={() => setIsModalOpen(false)}
+      />
     </main>
   );
 }
