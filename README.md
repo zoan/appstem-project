@@ -1,5 +1,9 @@
 # Appstem Full Stack Web Developer Prototype
 
+### References
+
+- [Difference between Debouncing and Throttling](https://www.geeksforgeeks.org/difference-between-debouncing-and-throttling/#)
+
 ## To-Do
 
 ### Frontend
@@ -44,6 +48,7 @@
 - update readme with assumptions and decisions
 - add as much documentation as possible (Types, JSDoc, etc)
 - ~~add .prettierrc~~
+- use appstem logo
 
 ### Stretch Goals
 
