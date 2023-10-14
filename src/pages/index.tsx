@@ -99,7 +99,7 @@ export default function Home() {
               <Image
                 onClick={() => handleImageClick({ imageUrl: img.webformatURL })}
                 className="cursor-pointer"
-                key={img.webformatURL}
+                key={img.id}
                 src={img.webformatURL}
                 alt={img.tags}
                 width="300"
