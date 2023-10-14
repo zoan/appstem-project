@@ -18,7 +18,7 @@ router.get(async (req, res) => {
 
     const data = (await pixabay.json()) as PixabayGetResponse;
 
-    res.status(200).json(data);
+    res.status(200).json({ data, key: process.env.PIXABAY_API_KEY });
   } catch (e) {
     console.error({
       e,
