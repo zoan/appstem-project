@@ -46,13 +46,13 @@
 - ~~add necessary typings~~
 - ~~add pre-commit hook to run pretty-quick and eslint~~
 - update readme with assumptions and decisions
-- add as much documentation as possible (Types, JSDoc, etc)
+- ~~add as much documentation as possible (Types, JSDoc, etc)~~
 - ~~add .prettierrc~~
-- use appstem logo
+- ~~use appstem logo~~
 
 ### Stretch Goals
 
 - add loading animation when loading next page
-- add toast denoting end of pages
+- ~~add toast denoting end of pages~~
 - add debug mode
 - add "Displaying ## images out of ##"

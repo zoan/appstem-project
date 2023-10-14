@@ -18,7 +18,7 @@ const apiKey = process.env.PIXABAY_API_KEY;
  * @param {number} page - the current page to fetch for the current query
  * @param {number} perPage - the number of results to return for each page (defaults to 20)
  * @param {string} searchQuery - the query used when searching for images
- * @returns {Object} a return object with data formatted for consumption by the frontend. see below for more details
+ * @returns {Object} a return object with data formatted for consumption by the frontend. see returnObj below for exact formatting
  */
 router.get(async (req, res) => {
   try {
