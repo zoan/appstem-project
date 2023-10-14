@@ -8,11 +8,23 @@ const router = createRouter<NextApiRequest, NextApiResponse>();
 
 const apiKey = process.env.PIXABAY_API_KEY;
 
+/**
+ * GET /api/images
+ *
+ * An endpoint that acts as a kind of middleware between the client and the Pixabay API.
+ * Takes in a few params and uses that to fetch the search query from Pixabay. The data will be formatted
+ * and returned to the frontend for consumption.
+ *
+ * @param {number} page - the current page to fetch for the current query
+ * @param {number} perPage - the number of results to return for each page (defaults to 20)
+ * @param {string} searchQuery - the query used when searching for images
+ * @returns {Object} a return object with data formatted for consumption by the frontend. see below for more details
+ */
 router.get(async (req, res) => {
   try {
     const page: number = parseInt(req.query.page as string);
+    const perPage: number = parseInt(req.query.perPage as string) ?? 20;
     const searchQuery = req.query.searchQuery;
-    const perPage: number = parseInt(req.query.perPage as string);
 
     // make sure query is url encoded and replace spaces with "+" as per the Pixabay Docs
     // https://pixabay.com/api/docs/
