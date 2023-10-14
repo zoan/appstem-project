@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { BaseSyntheticEvent } from 'react';
 import { Inter } from 'next/font/google';
+
+import Head from 'next/head';
 import Image from 'next/image';
 
 import { ImageModal } from '@/components/ImageModal/ImageModal';
@@ -51,7 +53,7 @@ export default function Home() {
 
       callFetch();
     }
-  }, [isAtBottom]);
+  }, [isAtBottom, images, nextPage, query]);
 
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
@@ -86,6 +88,13 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className} relative`}
     >
+      <Head>
+        <title>Marc&apos;s Appstem Full Stack Web Developer Prototype</title>
+        <meta
+          name="description"
+          content="Marc's attempt at Appstem's Full Stack Web Developer Prototype."
+        />
+      </Head>
       {/* <p>Query: {query}</p> */}
       <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
         <label>Search</label>
