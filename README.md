@@ -25,6 +25,8 @@
 ### Testing / Error Handling
 
 - implement error handling
+  - add error handling during API calls
+  - display errors in UI/UX
 - add some unit tests (?)
 
 ### Deployment / Deliverables
