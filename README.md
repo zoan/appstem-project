@@ -39,11 +39,11 @@
 ### Misc
 
 - ~~use TypeScript~~
-- add necessary typings
+- ~~add necessary typings~~
 - ~~add pre-commit hook to run pretty-quick and eslint~~
 - update readme with assumptions and decisions
 - add as much documentation as possible (Types, JSDoc, etc)
-- add .prettierrc
+- ~~add .prettierrc~~
 
 ### Stretch Goals
 

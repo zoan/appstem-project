@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { BaseSyntheticEvent } from 'react';
 import { Inter } from 'next/font/google';
+import Image from 'next/image';
 
 import { ImageModal } from '@/components/ImageModal/ImageModal';
 
