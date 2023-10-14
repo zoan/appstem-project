@@ -17,11 +17,13 @@
     "*.{js,jsx,ts,tsx}": "eslint"
   },
   "dependencies": {
+    "lodash.throttle": "^4.1.1",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/lodash.throttle": "^4.1.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

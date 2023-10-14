@@ -5,26 +5,11 @@ import { Inter } from "next/font/google";
 
 import { ImageModal } from "@/components/ImageModal/ImageModal";
 
-import { useDetectPageBottom } from "../utils/hooks";
-import { PixabayImage, PixabayGetResponse } from "@/utils/types";
+import { fetchPixabay } from "@/utils/helpers";
+import { useScrollHelpers } from "../utils/hooks";
+import { PixabayImage } from "@/utils/types";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const fetchPixabay = async ({
-  query,
-  currentPage,
-}: {
-  query: string;
-  currentPage: number;
-}) => {
-  const pixabay = await fetch(
-    `https://pixabay.com/api/?key=40014584-2010ba5ee0e4df4efd5fa33ec&q=${query}&per_page=20&page=${currentPage}`
-  );
-
-  const data = (await pixabay.json()) as PixabayGetResponse;
-
-  return data;
-};
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -33,9 +18,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
 
-  const { isAtBottom } = useDetectPageBottom();
-
-  console.log(isAtBottom);
+  const { isAtBottom } = useScrollHelpers();
 
   useEffect(() => {
     if (isAtBottom) {
@@ -61,14 +44,14 @@ export default function Home() {
     e.preventDefault();
 
     const searchQuery = e.target[0].value;
-    const formattedQuery = searchQuery.replaceAll(" ", "+");
 
-    setQuery(formattedQuery);
+    // start on page 1 with each new search
+    const data = await fetchPixabay({ query: searchQuery, currentPage: 1 });
+
+    // update the state
+    setQuery(searchQuery);
     setCurrentPage(1);
 
-    const data = await fetchPixabay({ query: formattedQuery, currentPage: 1 });
-
-    console.log(data);
     setImages(data?.hits);
   };
 
