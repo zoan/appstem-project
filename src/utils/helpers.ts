@@ -14,9 +14,27 @@ export const fetchPixabay = async ({
   query: string;
   currentPage: number;
 }) => {
-  const pixabay = await fetch(`/api/images?searchQuery=${query}&perPage=20&page=${currentPage}`);
+  try {
+    const pixabay = await fetch(`/api/images?searchQuery=${query}&perPage=20&page=${currentPage}`);
 
-  const data = (await pixabay.json()) as PixabayMiddlewareResponse;
+    // handle any errors from the fetch and throw if response was not ok
+    if (!pixabay.ok) {
+      throw {
+        status: pixabay.status,
+        statusText: pixabay.statusText,
+        url: pixabay.url
+      };
+    }
 
-  return data;
+    const data = (await pixabay.json()) as PixabayMiddlewareResponse;
+
+    return data;
+  } catch (e) {
+    console.error({
+      ...(e as {}),
+      message: 'fetchPixabay failed'
+    });
+
+    throw e;
+  }
 };

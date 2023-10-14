@@ -66,22 +66,26 @@ export default function Home() {
     const searchQuery = e.target[0].value;
 
     // start on page 1 with each new search
-    const data = await fetchPixabay({ query: searchQuery, currentPage: 1 });
+    const data = await fetchPixabay({ query: searchQuery, currentPage: 1 }).catch(e => {
+      toast.error('Error in fetching content', e);
+    });
 
-    const {
-      query,
-      currentPage: newCurrentPage,
-      previousPage: newPreviousPage,
-      nextPage: newNextPage,
-      images
-    } = data || {};
+    if (data) {
+      const {
+        query,
+        currentPage: newCurrentPage,
+        previousPage: newPreviousPage,
+        nextPage: newNextPage,
+        images
+      } = data || {};
 
-    // update the state
-    setQuery(query);
-    setCurrentPage(newCurrentPage);
-    setPreviousPage(newPreviousPage);
-    setNextPage(newNextPage);
-    setImages(images);
+      // update the state
+      setQuery(query);
+      setCurrentPage(newCurrentPage);
+      setPreviousPage(newPreviousPage);
+      setNextPage(newNextPage);
+      setImages(images);
+    }
   };
 
   const handleImageClick = ({ imageUrl = '' }) => {
