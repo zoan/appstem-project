@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { ImageModal } from "@/components/ImageModal/ImageModal";
 
 import { useDetectPageBottom } from "../utils/hooks";
+import { PixabayImage, PixabayGetResponse } from "@/utils/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +21,14 @@ const fetchPixabay = async ({
     `https://pixabay.com/api/?key=40014584-2010ba5ee0e4df4efd5fa33ec&q=${query}&per_page=20&page=${currentPage}`
   );
 
-  const data = await pixabay.json();
+  const data = (await pixabay.json()) as PixabayGetResponse;
 
   return data;
 };
 
 export default function Home() {
   const [query, setQuery] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<PixabayImage[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
@@ -71,7 +72,7 @@ export default function Home() {
     setImages(data?.hits);
   };
 
-  const handleImageClick = ({ imageUrl }) => {
+  const handleImageClick = ({ imageUrl = "" }) => {
     setCurrentImage(imageUrl);
     setIsModalOpen(true);
   };
