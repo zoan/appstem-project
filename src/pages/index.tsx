@@ -85,9 +85,7 @@ export default function Home() {
   };
 
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className} relative`}
-    >
+    <div>
       <Head>
         <title>Marc&apos;s Appstem Full Stack Web Developer Prototype</title>
         <meta
@@ -95,35 +93,40 @@ export default function Home() {
           content="Marc's attempt at Appstem's Full Stack Web Developer Prototype."
         />
       </Head>
-      {/* <p>Query: {query}</p> */}
-      <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
-        <label>Search</label>
-        <input />
-        <button type="submit">Submit!!</button>
-      </form>
-      <div className="w-auto">
-        {!images?.length ? null : (
-          <div className="grid gap-4 grid-cols-4 grid-rows-4">
-            {images.map(img => (
-              <Image
-                onClick={() => handleImageClick({ imageUrl: img.webformatURL })}
-                className="cursor-pointer"
-                key={img.id}
-                src={img.webformatURL}
-                alt={img.tags}
-                width="300"
-                height="300"
-              />
-            ))}
-          </div>
-        )}
-      </div>
-      {/* <p className="fixed top-0 left-0">Current Page: {currentPage}</p> */}
-      <ImageModal
-        isVisible={isModalOpen}
-        image={currentImage}
-        closeModal={() => setIsModalOpen(false)}
-      />
-    </main>
+      <main
+        className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className} relative`}
+      >
+        <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
+        {/* <p>Query: {query}</p> */}
+        <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
+          <label>Search</label>
+          <input />
+          <button type="submit">Submit!!</button>
+        </form>
+        <div className="w-auto">
+          {!images?.length ? null : (
+            <div className="grid gap-4 grid-cols-4 grid-rows-4">
+              {images.map(img => (
+                <Image
+                  onClick={() => handleImageClick({ imageUrl: img.webformatURL })}
+                  className="cursor-pointer"
+                  key={img.id}
+                  src={img.webformatURL}
+                  alt={img.tags}
+                  width="300"
+                  height="300"
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        {/* <p className="fixed top-0 left-0">Current Page: {currentPage}</p> */}
+        <ImageModal
+          isVisible={isModalOpen}
+          image={currentImage}
+          closeModal={() => setIsModalOpen(false)}
+        />
+      </main>
+    </div>
   );
 }
