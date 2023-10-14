@@ -26,10 +26,10 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [currentImage, setCurrentImage] = useState<string>('');
 
-  const { isAtBottom } = useScrollHelpers();
+  const { isAtBottomOfPage } = useScrollHelpers();
 
   useEffect(() => {
-    if (isAtBottom) {
+    if (isAtBottomOfPage) {
       if (!nextPage) {
         toast.info(
           `Reached end of image results for: "${query}". Displaying ${images.length} results.`
@@ -58,7 +58,7 @@ export default function Home() {
 
       callFetch();
     }
-  }, [isAtBottom]);
+  }, [isAtBottomOfPage]);
 
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
