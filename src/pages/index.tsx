@@ -23,17 +23,14 @@ export default function Home() {
   useEffect(() => {
     if (isAtBottom) {
       // fetch next set
-      setCurrentPage(currentPage + 1);
-
       const callFetch = async () => {
         const data = await fetchPixabay({
           query,
           currentPage: currentPage + 1,
         });
 
-        const concatArray = [...images, ...data?.hits];
-
-        setImages(concatArray);
+        setCurrentPage(currentPage + 1);
+        setImages([...images, ...data?.hits]);
       };
 
       callFetch();
