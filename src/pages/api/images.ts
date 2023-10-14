@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter } from "next-connect";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { createRouter } from 'next-connect';
 
-import { PixabayGetResponse } from "@/utils/types";
+import { PixabayGetResponse } from '@/utils/types';
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
@@ -10,9 +10,11 @@ const apiKey = process.env.PIXABAY_API_KEY;
 
 router.get(async (req, res) => {
   try {
-    const { currentPage = 1, searchQuery = "", perPage = 20 } = req.query;
+    const { currentPage = 1, searchQuery = '', perPage = 20 } = req.query;
 
-    const formattedQuery = (searchQuery as string).replaceAll(" ", "+");
+    // make sure query is url encoded and replace spaces with "+" as per the Pixabay Docs
+    // https://pixabay.com/api/docs/
+    const formattedQuery = (searchQuery as string).replaceAll(' ', '+');
 
     const pixabay = await fetch(
       `https://pixabay.com/api/?key=${apiKey}&q=${formattedQuery}&per_page=${perPage}&page=${currentPage}`
@@ -24,7 +26,7 @@ router.get(async (req, res) => {
   } catch (e) {
     console.error({
       e,
-      message: "An error was encountered in GET /api/images",
+      message: 'An error was encountered in GET /api/images'
     });
     throw e;
   }
@@ -33,7 +35,7 @@ router.get(async (req, res) => {
 export default router.handler({
   onError(err, req, res) {
     res.status(500).json({
-      error: (err as Error).message,
+      error: (err as Error).message
     });
-  },
+  }
 });
