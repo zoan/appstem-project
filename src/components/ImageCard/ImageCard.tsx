@@ -14,7 +14,7 @@ export const ImageCard = ({
       className="rounded overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition-all ease-in-out"
       onClick={handleClick}
     >
-      <img className="w-full bg-gray-200" src={imageURL} alt={tags} />
+      <img className="w-full bg-gray-200 sm:min-h-[15rem]" src={imageURL} alt={tags} />
       <div className="px-6 py-4 bg-white">
         <div className="flex items-center">
           <div

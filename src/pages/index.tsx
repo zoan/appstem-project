@@ -23,6 +23,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [previousPage, setPreviousPage] = useState<number>(1);
   const [nextPage, setNextPage] = useState<number>(1);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   // image modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -31,7 +32,7 @@ export default function Home() {
   const { isAtBottomOfPage, isScrolled } = useScrollHelpers();
 
   useEffect(() => {
-    if (isAtBottomOfPage && !!query) {
+    if (isAtBottomOfPage && !!query && !isFetching) {
       if (!nextPage) {
         toast.info(
           `Reached end of image results for: "${query}". Displaying ${images.length} results.`
@@ -46,6 +47,7 @@ export default function Home() {
       });
       // fetch next page
       const callFetch = async () => {
+        setIsFetching(true);
         const data = await fetchPixabay({
           query,
           currentPage: nextPage
@@ -62,6 +64,7 @@ export default function Home() {
         setPreviousPage(newPreviousPage);
         setNextPage(newNextPage);
         setImages([...images, ...newImages]);
+        setIsFetching(false);
       };
 
       callFetch();
@@ -71,14 +74,21 @@ export default function Home() {
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
 
+    scrollToTop();
+    setImages([]);
+
     const searchQuery = e.target[0].value;
 
     if (!searchQuery) return;
+
+    setIsFetching(true);
 
     // start on page 1 with each new search
     const data = await fetchPixabay({ query: searchQuery, currentPage: 1 }).catch(e => {
       toast.error('Error in fetching content', e);
     });
+
+    setIsFetching(false);
 
     if (data) {
       const {
@@ -95,8 +105,6 @@ export default function Home() {
       setPreviousPage(newPreviousPage);
       setNextPage(newNextPage);
       setImages(images);
-
-      scrollToTop();
     }
   };
 
