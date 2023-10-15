@@ -9,7 +9,6 @@ export const ImageCard = ({
   likes = 0
 }) => {
   const splitTags = tags.split(', ');
-  console.log({ splitTags });
   return (
     <div
       className="rounded overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition-all ease-in-out"

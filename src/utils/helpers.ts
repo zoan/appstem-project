@@ -1,5 +1,9 @@
 import { PixabayMiddlewareResponse } from '@/utils/types';
 
+export const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 /**
  * A small helper function that calls the NextJS API route which helps fetch and format the image search results from the Pixabay API.
  *

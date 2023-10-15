@@ -7,9 +7,10 @@ import throttle from 'lodash.throttle';
  * @returns {Object} an object containing helpful values related to scrolling, such as isAtBottomOfPage, scrollY, innerHeight
  */
 export const useScrollHelpers = () => {
-  const [isAtBottomOfPage, setIsAtBottomOfPage] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const [innerHeight, setInnerHeight] = useState(0);
+  const [isAtBottomOfPage, setIsAtBottomOfPage] = useState<boolean>(false);
+  const [scrollY, setScrollY] = useState<number>(0);
+  const [innerHeight, setInnerHeight] = useState<number>(0);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   const listener = () => {
     const scrollHeight = window.innerHeight + window.scrollY;
@@ -18,6 +19,7 @@ export const useScrollHelpers = () => {
     setIsAtBottomOfPage(scrollHeight >= clientHeight);
     setScrollY(window.scrollY);
     setInnerHeight(window.innerHeight);
+    setIsScrolled(window.scrollY > 140);
   };
 
   const throttledListener = throttle(listener, 100);
@@ -30,5 +32,5 @@ export const useScrollHelpers = () => {
     };
   }, []);
 
-  return { isAtBottomOfPage, scrollY, innerHeight };
+  return { isAtBottomOfPage, isScrolled, scrollY, innerHeight };
 };

@@ -1,14 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useScrollHelpers } from '@/utils/hooks';
 
 export const NavBar = () => {
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
-
-  const { scrollY } = useScrollHelpers();
-
-  useEffect(() => {
-    setIsScrolled(scrollY > 140);
-  }, [scrollY]);
+  const { isScrolled } = useScrollHelpers();
 
   return (
     <div

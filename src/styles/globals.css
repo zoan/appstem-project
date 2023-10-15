@@ -62,3 +62,7 @@ body {
   visibility: hidden;
   transition-duration: 200ms;
 }
+
+.to-top-button-hidden {
+  bottom: -10rem;
+}
