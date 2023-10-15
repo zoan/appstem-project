@@ -37,9 +37,9 @@
 
 ### Testing / Error Handling
 
-- implement error handling
-  - add error handling during API calls
-  - display errors in UI/UX
+- ~~implement error handling~~
+  - ~~add error handling during API calls~~
+  - ~~display errors in UI/UX~~
 - add some unit tests (?)
 
 ### Deployment / Deliverables
@@ -64,4 +64,4 @@
 - ~~add loading animation when loading next page~~
 - ~~add toast denoting end of pages~~
 - add debug mode
-- add "Displaying ## images out of ##"
+- ~~add "Displaying ## images out of ##"~~
