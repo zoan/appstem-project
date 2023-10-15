@@ -2,7 +2,7 @@ import { scrollToTop } from '@/utils/helpers';
 
 import { useScrollHelpers } from '@/utils/hooks';
 
-export const ScrollToTopButton = () => {
+const ScrollToTopButton = () => {
   const { isScrolled } = useScrollHelpers();
 
   return (

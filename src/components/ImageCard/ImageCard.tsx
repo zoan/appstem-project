@@ -1,6 +1,6 @@
 type ImageCardProps = {};
 
-export const ImageCard = ({
+const ImageCard = ({
   imageURL = '',
   user = '',
   userImageURL = '',
@@ -42,3 +42,5 @@ export const ImageCard = ({
     </div>
   );
 };
+
+export default ImageCard;

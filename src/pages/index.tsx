@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import { ImageModal } from '@/components/ImageModal/ImageModal';
-import { ImageCard } from '@/components/ImageCard/ImageCard';
+import ImageModal from '@/components/ImageModal/ImageModal';
+import ImageCard from '@/components/ImageCard/ImageCard';
 import NavBar from '@/components/NavBar/NavBar';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 
@@ -45,12 +45,6 @@ export default function Home() {
         );
         return;
       }
-      // show toast for loading new photos
-      // toast.info('Loading more images...', {
-      //   autoClose: 2000,
-      //   position: 'bottom-center',
-      //   theme: 'dark'
-      // });
       // fetch next page
       const callFetch = async () => {
         setIsFetching(true);
@@ -151,7 +145,7 @@ export default function Home() {
               className="appearance-none bg-transparent border-none w-full text-black mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray"
               type="text"
               placeholder="Search images..."
-              aria-label="Full name"
+              aria-label="Search images"
             />
             <button
               className="flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1 px-2 rounded"

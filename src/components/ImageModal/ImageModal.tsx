@@ -9,7 +9,7 @@ type ImageModalProps = {
   image: PixabayImage;
 };
 
-export const ImageModal = ({
+const ImageModal = ({
   isVisible = false,
   closeModal = () => {},
   image = {} as PixabayImage
@@ -104,3 +104,5 @@ export const ImageModal = ({
     </Transition.Root>
   );
 };
+
+export default ImageModal;

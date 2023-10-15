@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useScrollHelpers } from '@/utils/hooks';
 
-export const NavBar = () => {
+const NavBar = () => {
   const { isScrolled } = useScrollHelpers();
 
   return (
