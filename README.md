@@ -4,9 +4,14 @@ This is my attempt at the Appstem Full Stack Web Developer Prototype.
 
 The app displays a text input with a button that is used to search the Pixabay Image API. When the user scrolls, the app will load the next page of images from the Pixabay API in an "endless scroll" way. When clicking on an image, the image will be displayed in an overlay/modal with some additional information. If the API reaches the end of the images for the current query, a small toast/notification will display denoting the end of the images.
 
+![Screenshot1](public/appstem-search-01.png)
+![Screenshot2](public/appstem-search-02.png)
+![Screenshot3](public/appstem-search-03.png)
+
 ## Assumptions & Decisions
 
 #### Architecture / Design / Libraries
+
 - For this project I decided to use Next.JS, as Next.JS makes it easy to quickly build and deploy fullstack applications.
 - Some helpful libraries I used include:
   - `lodash`
@@ -15,25 +20,31 @@ The app displays a text input with a button that is used to search the Pixabay I
   - `tailwindcss`
 
 #### Frontend / Endless Scroll Effect
+
 - To achieve the endless scroll effect I am assuming that after a user enters a search query, once they scroll close enough to the bottom of the page the middleware/API will be called to retrieve the next page of images.
 - For implementation, I am utilizing a scroll event listener that keeps track of helpful scroll-related values and will fetch the next page of image results when the bottom of the page is detected.
 
 #### Middleware / API
+
 - An assumption I made in terms of the middleware was that it should be a layer of code that sits between the client and the 3rd party Image API, and that runs in Node/on the server, but that it didn't necessarily have to be specifically "Express/Next.JS middleware".
 - My implementation of the middleware is built using a Next.JS API route which the client can call to retrieve formatted data from the Image API for consumption on the frontend.
 
 #### Deployment
+
 - I decided to deploy the project using Vercel, because of its ease of use and familiarity I have with Vercel.
 
 #### Continued / Future Development
+
 - If I were to continue working on the project and extend upon it I would explore the follow features/ideas:
   - leverage unused parts of the Image API to add features like:
     - using `order` to add a sorting feature
     - using `category` and `colors` to implement a filtering feature
   - add an `X` button that can clear the current search query
+
 ---
 
 ## Running Locally
+
 ```
 yarn run dev
 ```
@@ -50,11 +61,11 @@ GET /api/images
 
 ### Query Params
 
-| Param | Type | Description | Required? |
-|-------|------|-------------|-----------|
-| page | number | The current page to fetch for the current search query | ✅ |
-| perPage | number | The number of results to return for each page (defaults to 10) | |
-| searchQuery | string | The query used to search for images | ✅ |
+| Param       | Type   | Description                                                    | Required? |
+| ----------- | ------ | -------------------------------------------------------------- | --------- |
+| page        | number | The current page to fetch for the current search query         | ✅        |
+| perPage     | number | The number of results to return for each page (defaults to 10) |           |
+| searchQuery | string | The query used to search for images                            | ✅        |
 
 #### Example request
 
@@ -63,7 +74,9 @@ http://localhost:3000/api/images?searchQuery=apple&perPage=10&page=1
 ```
 
 ### Returns
+
 #### Example return object
+
 ```js
 {
     "query": "apple",
