@@ -7,6 +7,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import ImageGallery from '@/components/ImageGallery/ImageGallery';
 import InputSubmitForm from '@/components/InputSubmitForm/InputSubmitForm';
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import NavBar from '@/components/NavBar/NavBar';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 
@@ -31,8 +32,9 @@ export default function Home() {
   // this useEffect helps detect when the user is at the bottom of the page and will attempt
   // to load the next group of images
   useEffect(() => {
+    const cooldownInterval = 500; // the amount of time to wait before allowing another  fetch
     const shouldFetchNextPage =
-      isAtBottomOfPage && !!query && !isFetching && lastUpdated + 1000 < Date.now();
+      isAtBottomOfPage && !!query && !isFetching && lastUpdated + cooldownInterval < Date.now();
 
     if (shouldFetchNextPage) {
       // if there is no nextPage, all images for that query from the API have been fetched
@@ -139,6 +141,7 @@ export default function Home() {
         <InputSubmitForm handleSubmit={handleSubmit} />
         {hasNoResults && <p>No results found for &quot;{query}&quot;.</p>}
         <ImageGallery images={images} />
+        {isFetching && <LoadingSpinner customClass="my-8" />}
         <ScrollToTopButton />
       </main>
     </div>
