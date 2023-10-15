@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 import { ImageModal } from '@/components/ImageModal/ImageModal';
 import { ImageCard } from '@/components/ImageCard/ImageCard';
+import NavBar from '@/components/NavBar/NavBar';
 
 import { fetchPixabay } from '@/utils/helpers';
 import { useScrollHelpers } from '../utils/hooks';
@@ -110,7 +111,11 @@ export default function Home() {
       >
         <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         {/* <p>Query: {query}</p> */}
-        <form className="flex flex-col items-center justify-center my-8" onSubmit={handleSubmit}>
+        <NavBar />
+        <form
+          className="sticky top-5 flex-col items-center justify-center my-8 z-10"
+          onSubmit={handleSubmit}
+        >
           <div className="flex items-center bg-white border-white-500 border-2 p-2 rounded-md focus-within:border-green-500  ease-in-out duration-200">
             <input
               className="appearance-none bg-transparent border-none w-full text-black mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray"

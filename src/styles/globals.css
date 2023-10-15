@@ -56,3 +56,9 @@ body {
     #92c690
   );
 }
+
+.nav-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition-duration: 200ms;
+}

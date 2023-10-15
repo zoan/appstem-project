@@ -20,7 +20,7 @@ export const useScrollHelpers = () => {
     setInnerHeight(window.innerHeight);
   };
 
-  const throttledListener = throttle(listener, 300);
+  const throttledListener = throttle(listener, 100);
 
   useEffect(() => {
     window.addEventListener('scroll', throttledListener);
