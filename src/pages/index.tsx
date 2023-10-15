@@ -92,7 +92,10 @@ export default function Home() {
 
     // start on page 1 with each new search
     const data = await fetchPixabay({ query: searchQuery, currentPage: 1 }).catch(e => {
-      toast.error('Error in fetching content', e);
+      const errorMessage = [e.message, e.status, e.statusText].filter(Boolean).join(' | ');
+      toast.error(errorMessage, {
+        position: 'bottom-center'
+      });
     });
 
     setIsFetching(false);

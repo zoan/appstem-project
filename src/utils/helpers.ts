@@ -26,7 +26,8 @@ export const fetchPixabay = async ({
       throw {
         status: pixabay.status,
         statusText: pixabay.statusText,
-        url: pixabay.url
+        url: pixabay.url,
+        message: 'Error connecting to Pixabay'
       };
     }
 
@@ -35,7 +36,7 @@ export const fetchPixabay = async ({
     return data;
   } catch (e) {
     console.error({
-      ...(e as {}),
+      e,
       message: 'fetchPixabay failed'
     });
 
