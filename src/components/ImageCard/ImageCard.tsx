@@ -30,7 +30,7 @@ export const ImageCard = ({
           </div>
         </div>
       </div>
-      <div className="px-6 pt-4 pb-2 bg-white">
+      {/* <div className="px-6 pt-4 pb-2 bg-white">
         {splitTags.map(tag => (
           <span
             key={tag}
@@ -39,7 +39,7 @@ export const ImageCard = ({
             {tag}
           </span>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -16,7 +16,7 @@ export const ImageModal = ({
 }: ImageModalProps) => {
   const cancelButtonRef = useRef(null);
 
-  const { webformatURL, tags, user, userImageURL, views, pageURL } = image;
+  const { webformatURL, tags, user, userImageURL, views, pageURL, likes, imageSize } = image;
   const splitTags = tags?.split(', ');
 
   return (
@@ -64,7 +64,8 @@ export const ImageModal = ({
                     />
                     <div className="text-sm break-all">
                       <p className="text-gray-900 font-bold leading-none">{user}</p>
-                      <p className="text-gray-600">Views: {views}</p>
+                      <p className="text-gray-600">{likes} likes</p>
+                      <p className="text-gray-600">{views} views</p>
                     </div>
                   </div>
                   <div className="pt-4">
