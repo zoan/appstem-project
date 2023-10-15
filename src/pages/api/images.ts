@@ -16,14 +16,14 @@ const apiKey = process.env.PIXABAY_API_KEY;
  * and returned to the frontend for consumption.
  *
  * @param {number} page - the current page to fetch for the current query
- * @param {number} perPage - the number of results to return for each page (defaults to 20)
+ * @param {number} perPage - the number of results to return for each page (API defaults to 20)
  * @param {string} searchQuery - the query used when searching for images
  * @returns {Object} a return object with data formatted for consumption by the frontend. see returnObj below for exact formatting
  */
 router.get(async (req, res) => {
   try {
     const page: number = parseInt(req.query.page as string);
-    const perPage: number = parseInt(req.query.perPage as string) ?? 20;
+    const perPage: number = parseInt(req.query.perPage as string) ?? 10;
     const searchQuery = req.query.searchQuery;
 
     // make sure query is url encoded and replace spaces with "+" as per the Pixabay Docs

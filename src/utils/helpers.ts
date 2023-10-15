@@ -19,7 +19,7 @@ export const fetchPixabay = async ({
   currentPage: number;
 }) => {
   try {
-    const pixabay = await fetch(`/api/images?searchQuery=${query}&perPage=20&page=${currentPage}`);
+    const pixabay = await fetch(`/api/images?searchQuery=${query}&perPage=10&page=${currentPage}`);
 
     // handle any errors from the fetch and throw if response was not ok
     if (!pixabay.ok) {

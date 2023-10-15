@@ -38,6 +38,12 @@ export default function Home() {
         );
         return;
       }
+      // show toast for loading new photos
+      toast.info('Loading more images...', {
+        autoClose: 2000,
+        position: 'bottom-center',
+        theme: 'dark'
+      });
       // fetch next page
       const callFetch = async () => {
         const data = await fetchPixabay({
