@@ -1,5 +1,14 @@
 # Appstem Full Stack Web Developer Prototype
 
+## Assumptions & Decisions
+
+- assume middleware layer is piece of code between client and 3rd party api, not necessary an express middleware
+- describe middleware
+- describe logic of endless scroll
+- describe decision on libraries
+- describe decision of nextjs
+- describe decision of vercel deploy
+
 ### References
 
 - [Difference between Debouncing and Throttling](https://www.geeksforgeeks.org/difference-between-debouncing-and-throttling/#)
@@ -13,9 +22,9 @@
 - ~~add responsive overlay~~
 - ~~display data served from the API~~
 - ~~implement "endless scroll effect"~~
-- improve design and styles
+- ~~improve design and styles~~
 - make sure design is responsive and looks good/works well on multiple devices
-- add helpful UX items
+- ~~add helpful UX items~~
 
 ### API
 
@@ -52,7 +61,7 @@
 
 ### Stretch Goals
 
-- add loading animation when loading next page
+- ~~add loading animation when loading next page~~
 - ~~add toast denoting end of pages~~
 - add debug mode
 - add "Displaying ## images out of ##"

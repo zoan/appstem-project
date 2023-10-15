@@ -45,7 +45,8 @@ router.get(async (req, res) => {
       perPage,
       totalResults: data?.totalHits,
       totalPages: Math.ceil(data?.totalHits / perPage),
-      images: data?.hits || []
+      images: data?.hits || [],
+      updatedAt: Date.now()
     };
 
     res.status(200).json(returnObj);

@@ -42,4 +42,5 @@ export type PixabayMiddlewareResponse = {
   totalResults: number;
   totalPages: number;
   images: Array<PixabayImage>;
+  updatedAt: number;
 };

@@ -12,11 +12,13 @@ export const useScrollHelpers = () => {
   const [innerHeight, setInnerHeight] = useState<number>(0);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
+  const pageBottomOffset = 200; // update this value to adjust when "bottom of page" should be detected
+
   const listener = () => {
     const scrollHeight = window.innerHeight + window.scrollY;
     const clientHeight = document.body.clientHeight;
 
-    setIsAtBottomOfPage(scrollHeight >= clientHeight);
+    setIsAtBottomOfPage(scrollHeight + pageBottomOffset >= clientHeight);
     setScrollY(window.scrollY);
     setInnerHeight(window.innerHeight);
     setIsScrolled(window.scrollY > 140);

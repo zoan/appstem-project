@@ -24,6 +24,7 @@ export default function Home() {
   const [previousPage, setPreviousPage] = useState<number>(1);
   const [nextPage, setNextPage] = useState<number>(1);
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [lastUpdated, setLastUpdated] = useState<number>(0);
 
   // image modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -32,19 +33,23 @@ export default function Home() {
   const { isAtBottomOfPage, isScrolled } = useScrollHelpers();
 
   useEffect(() => {
-    if (isAtBottomOfPage && !!query && !isFetching) {
+    if (isAtBottomOfPage && !!query && !isFetching && lastUpdated + 1000 < Date.now()) {
       if (!nextPage) {
         toast.info(
-          `Reached end of image results for: "${query}". Displaying ${images.length} results.`
+          `Reached end of image results for: "${query}". Displaying ${images.length} results.`,
+          {
+            position: 'bottom-center',
+            theme: 'dark'
+          }
         );
         return;
       }
       // show toast for loading new photos
-      toast.info('Loading more images...', {
-        autoClose: 2000,
-        position: 'bottom-center',
-        theme: 'dark'
-      });
+      // toast.info('Loading more images...', {
+      //   autoClose: 2000,
+      //   position: 'bottom-center',
+      //   theme: 'dark'
+      // });
       // fetch next page
       const callFetch = async () => {
         setIsFetching(true);
@@ -57,13 +62,15 @@ export default function Home() {
           currentPage: newCurrentPage,
           previousPage: newPreviousPage,
           nextPage: newNextPage,
-          images: newImages = []
+          images: newImages = [],
+          updatedAt
         } = data || {};
 
         setCurrentPage(newCurrentPage);
         setPreviousPage(newPreviousPage);
         setNextPage(newNextPage);
         setImages([...images, ...newImages]);
+        setLastUpdated(updatedAt);
         setIsFetching(false);
       };
 
@@ -96,7 +103,8 @@ export default function Home() {
         currentPage: newCurrentPage,
         previousPage: newPreviousPage,
         nextPage: newNextPage,
-        images
+        images,
+        updatedAt
       } = data || {};
 
       // update the state
@@ -104,6 +112,7 @@ export default function Home() {
       setCurrentPage(newCurrentPage);
       setPreviousPage(newPreviousPage);
       setNextPage(newNextPage);
+      setLastUpdated(updatedAt);
       setImages(images);
     }
   };
