@@ -6,7 +6,7 @@ export const ImageCard = ({
   userImageURL = '',
   handleClick = () => {},
   tags = '',
-  views = 0
+  likes = 0
 }) => {
   const splitTags = tags.split(', ');
   console.log({ splitTags });
@@ -24,7 +24,9 @@ export const ImageCard = ({
           />
           <div className="text-sm break-all">
             <p className="text-gray-900 font-bold leading-none">{user}</p>
-            <p className="text-gray-600">Views: {views}</p>
+            <p className="text-gray-600">
+              {likes} like{likes === 1 ? '' : 's'}
+            </p>
           </div>
         </div>
       </div>

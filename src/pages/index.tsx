@@ -25,7 +25,7 @@ export default function Home() {
 
   // image modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [currentImage, setCurrentImage] = useState<string>('');
+  const [currentImage, setCurrentImage] = useState<PixabayImage>({} as PixabayImage);
 
   const { isAtBottomOfPage } = useScrollHelpers();
 
@@ -89,8 +89,8 @@ export default function Home() {
     }
   };
 
-  const handleImageClick = ({ imageUrl = '' }) => {
-    setCurrentImage(imageUrl);
+  const handleImageClick = ({ image = {} }) => {
+    setCurrentImage(image as PixabayImage);
     setIsModalOpen(true);
   };
 
@@ -104,7 +104,7 @@ export default function Home() {
         />
       </Head>
       <main
-        className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className} relative`}
+        className={`flex min-h-screen flex-col items-center justify-between p-8 sm:p-24 ${inter.className} relative`}
       >
         <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         {/* <p>Query: {query}</p> */}
@@ -130,12 +130,12 @@ export default function Home() {
               {images.map(img => (
                 <ImageCard
                   key={img.id}
-                  handleClick={() => handleImageClick({ imageUrl: img.webformatURL })}
+                  handleClick={() => handleImageClick({ image: img })}
                   imageURL={img.webformatURL}
                   user={img.user}
                   userImageURL={img.userImageURL}
                   tags={img.tags}
-                  views={img.views}
+                  likes={img.likes}
                 />
               ))}
             </div>
