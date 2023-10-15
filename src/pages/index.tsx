@@ -30,7 +30,7 @@ export default function Home() {
   const { isAtBottomOfPage } = useScrollHelpers();
 
   useEffect(() => {
-    if (isAtBottomOfPage) {
+    if (isAtBottomOfPage && !!query) {
       if (!nextPage) {
         toast.info(
           `Reached end of image results for: "${query}". Displaying ${images.length} results.`
@@ -65,6 +65,8 @@ export default function Home() {
     e.preventDefault();
 
     const searchQuery = e.target[0].value;
+
+    if (!searchQuery) return;
 
     // start on page 1 with each new search
     const data = await fetchPixabay({ query: searchQuery, currentPage: 1 }).catch(e => {
@@ -108,16 +110,16 @@ export default function Home() {
       >
         <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         {/* <p>Query: {query}</p> */}
-        <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
-          <div className="flex items-center border-b border-teal-500 py-2">
+        <form className="flex flex-col items-center justify-center my-8" onSubmit={handleSubmit}>
+          <div className="flex items-center border-b border-green-500 py-2">
             <input
-              className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+              className="appearance-none bg-transparent border-none w-full text-white font-bold mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-white"
               type="text"
               placeholder="Search images..."
               aria-label="Full name"
             />
             <button
-              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+              className="flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1 px-2 rounded"
               type="submit"
             >
               Search

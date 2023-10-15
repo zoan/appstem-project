@@ -24,7 +24,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to left bottom,
     #c6cbd4,
     #cdd1d9,
@@ -38,5 +38,21 @@ body {
     #e3e3e4,
     #e0e0e1,
     #dedede
+  ); */
+  /* background-image: linear-gradient(to left bottom, #8eaf89, #9ab595, #a6bba0, #b2c2ad, #bdc8b9, #b8c3b4, #b3beb0, #aeb9ab, #98a794, #82967e, #6c8569, #567455); */
+  background-image: linear-gradient(
+    to left bottom,
+    #b6e1b0,
+    #bfe3b9,
+    #c8e4c2,
+    #d0e6cb,
+    #d8e7d4,
+    #d5e5d1,
+    #d3e2cf,
+    #d0e0cc,
+    #c1dabc,
+    #b2d3ad,
+    #a2cd9e,
+    #92c690
   );
 }
