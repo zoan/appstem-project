@@ -6,7 +6,7 @@ The app displays a text input with a button that is used to search the Pixabay I
 
 ![Screenshot2](public/appstem-search-02.png)
 ![Screenshot3](public/appstem-search-03.png)
-![Screenshot3](public/appstem-search-03.png)
+![Screenshot4](public/appstem-search-04.png)
 
 ## Assumptions & Decisions
 
