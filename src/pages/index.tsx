@@ -126,7 +126,7 @@ export default function Home() {
         </form>
         <div className="w-auto">
           {!images?.length ? null : (
-            <div className="grid gap-4 grid-cols-4 items-start">
+            <div className="grid gap-4 grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3">
               {images.map(img => (
                 <ImageCard
                   key={img.id}
