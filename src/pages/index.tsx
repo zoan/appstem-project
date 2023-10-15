@@ -82,7 +82,9 @@ export default function Home() {
     e.preventDefault();
 
     scrollToTop();
+    // reset state
     setImages([]);
+    setLastUpdated(0);
 
     const searchQuery = e.target[0].value;
 
@@ -135,7 +137,7 @@ export default function Home() {
         />
       </Head>
       <main
-        className={`flex min-h-screen flex-col items-center justify-between p-8 sm:p-24 ${inter.className} relative`}
+        className={`flex min-h-screen flex-col items-center justify-start p-8 sm:p-24 ${inter.className} relative`}
       >
         <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         {/* <p>Query: {query}</p> */}
@@ -160,6 +162,7 @@ export default function Home() {
           </div>
         </form>
         <div className="w-auto">
+          {!!lastUpdated && !images?.length && <p>No results found for &quot;{query}&quot;.</p>}
           {!images?.length ? null : (
             <div className="grid gap-4 grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3">
               {images.map(img => (
