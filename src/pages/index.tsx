@@ -68,15 +68,14 @@ export default function Home() {
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
 
+    const searchQuery = e.target[0].value;
+    if (!searchQuery) return;
+
     scrollToTop();
 
     // reset state
     setImages([]);
     setLastUpdated(0);
-
-    const searchQuery = e.target[0].value;
-
-    if (!searchQuery) return;
 
     setIsFetching(true);
 

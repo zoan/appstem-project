@@ -9,6 +9,53 @@
 - describe decision of nextjs
 - describe decision of vercel deploy
 
+### API Documentation
+
+```
+GET /api/images
+```
+
+#### Query Params
+
+| Param | Type | Description | Required? |
+| page | number | The current page to fetch for the current search query | ✅ |
+| perPage | number | The number of results to return for each page (defaults to 10) | |
+| searchQuery | string | The query used to search for images | ✅ |
+
+```title="Example request"
+/api/images?searchQuery=apple&perPage=10&page=1
+```
+
+#### Returns
+
+```js title="Example return object"
+{
+    "query": "apple",
+    "currentPage": null,
+    "previousPage": null,
+    "nextPage": null,
+    "perPage": 10,
+    "totalResults": 500,
+    "totalPages": 50,
+    "images": [
+        {
+            "id": 1122537,
+            "pageURL": "https://pixabay.com/photos/apple-water-droplets-fruit-moist-1122537/",
+            "type": "photo",
+            ...
+        },
+        ...
+        {
+            "id": 2788651,
+            "pageURL": "https://pixabay.com/photos/apples-apple-tree-fruits-orchard-2788651/",
+            "type": "photo",
+            ...
+        }
+    ],
+    "updatedAt": 1697396739677
+}
+```
+
 ### References
 
 - [Difference between Debouncing and Throttling](https://www.geeksforgeeks.org/difference-between-debouncing-and-throttling/#)

@@ -16,7 +16,7 @@ const apiKey = process.env.PIXABAY_API_KEY;
  * and returned to the frontend for consumption.
  *
  * @param {number} page - the current page to fetch for the current query
- * @param {number} perPage - the number of results to return for each page (API defaults to 20)
+ * @param {number} perPage - the number of results to return for each page (API defaults to 20, default to 10 for this endpoint)
  * @param {string} searchQuery - the query used when searching for images
  * @returns {Object} a return object with data formatted for consumption by the frontend. see returnObj below for exact formatting
  */
