@@ -5,9 +5,7 @@ import { toast } from 'react-toastify';
 
 import Head from 'next/head';
 import Image from 'next/image';
-
-import ImageModal from '@/components/ImageModal/ImageModal';
-import ImageCard from '@/components/ImageCard/ImageCard';
+import ImageGallery from '@/components/ImageGallery/ImageGallery';
 import InputSubmitForm from '@/components/InputSubmitForm/InputSubmitForm';
 import NavBar from '@/components/NavBar/NavBar';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
@@ -27,10 +25,6 @@ export default function Home() {
   const [nextPage, setNextPage] = useState<number>(1);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [lastUpdated, setLastUpdated] = useState<number>(0);
-
-  // image modal state
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [currentImage, setCurrentImage] = useState<PixabayImage>({} as PixabayImage);
 
   const { isAtBottomOfPage, isScrolled } = useScrollHelpers();
 
@@ -101,11 +95,6 @@ export default function Home() {
     }
   };
 
-  const handleImageClick = ({ image = {} }) => {
-    setCurrentImage(image as PixabayImage);
-    setIsModalOpen(true);
-  };
-
   const setSearchState = ({
     data,
     isNewSearch = false
@@ -132,6 +121,8 @@ export default function Home() {
     setImages(imagesArray);
   };
 
+  const hasNoResults = !!lastUpdated && !images?.length;
+
   return (
     <div>
       <Head>
@@ -147,29 +138,8 @@ export default function Home() {
         <NavBar />
         <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         <InputSubmitForm handleSubmit={handleSubmit} />
-        <div className="w-auto">
-          {!!lastUpdated && !images?.length && <p>No results found for &quot;{query}&quot;.</p>}
-          {!images?.length ? null : (
-            <div className="grid gap-4 grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3">
-              {images.map(img => (
-                <ImageCard
-                  key={img.webformatURL}
-                  handleClick={() => handleImageClick({ image: img })}
-                  imageURL={img.webformatURL}
-                  user={img.user}
-                  userImageURL={img.userImageURL}
-                  tags={img.tags}
-                  likes={img.likes}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-        <ImageModal
-          isVisible={isModalOpen}
-          image={currentImage}
-          closeModal={() => setIsModalOpen(false)}
-        />
+        {hasNoResults && <p>No results found for &quot;{query}&quot;.</p>}
+        <ImageGallery images={images} />
         <ScrollToTopButton />
       </main>
     </div>
