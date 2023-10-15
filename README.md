@@ -1,11 +1,11 @@
 # Appstem Full Stack Web Developer Prototype
 
-This is my attempt at the Appstem Full Stack Web Developer Prototype.
+My attempt at the Appstem Full Stack Web Developer Prototype.
 
-The app displays a text input with a button that is used to search the Pixabay Image API. When the user scrolls, the app will load the next page of images from the Pixabay API in an "endless scroll" way. When clicking on an image, the image will be displayed in an overlay/modal with some additional information. If the API reaches the end of the images for the current query, a small toast/notification will display denoting the end of the images.
+The app displays a text input with a button that is used to search the Pixabay Image API. When the user scrolls, the app will load the next page of images from the Pixabay API in an "endless scroll". When clicking on an image, the image will be displayed in an overlay/modal with some additional information. If the API reaches the end of the total images for the current query, a small toast/notification will display denoting the end of the images.
 
-![Screenshot1](public/appstem-search-01.png)
 ![Screenshot2](public/appstem-search-02.png)
+![Screenshot3](public/appstem-search-03.png)
 ![Screenshot3](public/appstem-search-03.png)
 
 ## Assumptions & Decisions
@@ -22,7 +22,10 @@ The app displays a text input with a button that is used to search the Pixabay I
 #### Frontend / Endless Scroll Effect
 
 - To achieve the endless scroll effect I am assuming that after a user enters a search query, once they scroll close enough to the bottom of the page the middleware/API will be called to retrieve the next page of images.
+  - Initially I had the page load more images once it got to the exact bottom of the page, but later added an offset value to make the loading experience a little more seamless for the user. This offset can be adjusted based on user feedback if necessary to make the UX even smoother.
 - For implementation, I am utilizing a scroll event listener that keeps track of helpful scroll-related values and will fetch the next page of image results when the bottom of the page is detected.
+- In terms of form management, I usually use a library like Formik, but for this project I decided that the form was simple enough to just utilize the basic `<form>` element and handle the search input with that. If the project were to add more forms and if the forms increased in complexity I would definitely look into using a form library.
+- In terms of state management, I felt that the requirements weren't complex enough to require the use of a 3rd party state management library like Zustand/Jotai/Context/Redux. The built in local state management in React was enough for this project, but if the scope were to increase and resulted in more data being shared in more places, I would re-evaluate and make a decision to incorporate a state management library based on the new scope.
 
 #### Middleware / API
 
@@ -36,10 +39,17 @@ The app displays a text input with a button that is used to search the Pixabay I
 #### Continued / Future Development
 
 - If I were to continue working on the project and extend upon it I would explore the follow features/ideas:
+  - explore using other helpful libraries like `react-query` for data fetching and Zustand/Jotai for state management
+  - add more features that give the user more feedback
+    - handle display of loading state in a more elegant way
+    - display more values returned from the API that can be useful like "Total images loaded", "# of pages", etc.
   - leverage unused parts of the Image API to add features like:
     - using `order` to add a sorting feature
     - using `category` and `colors` to implement a filtering feature
   - add an `X` button that can clear the current search query
+  - add testing
+  - improve error handling and messaging
+    - currently my app does not handle any errors or limiations involved with rate-limiting, it would be interesting to dive more into this in terms of scaling to a large number of users
 
 ---
 
