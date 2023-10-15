@@ -1,7 +1,10 @@
 import { PixabayMiddlewareResponse } from '@/utils/types';
 
+/**
+ * A light helper function to help smoothly scroll the page to the top
+ */
 export const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window?.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 /**

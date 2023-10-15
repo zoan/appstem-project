@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useScrollHelpers } from '@/utils/hooks';
 
 const NavBar = () => {

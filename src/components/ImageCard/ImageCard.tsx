@@ -1,4 +1,11 @@
-type ImageCardProps = {};
+type ImageCardProps = {
+  imageURL: string;
+  user: string;
+  userImageURL: string;
+  handleClick: () => void;
+  tags: string;
+  likes: number;
+};
 
 const ImageCard = ({
   imageURL = '',
@@ -7,8 +14,7 @@ const ImageCard = ({
   handleClick = () => {},
   tags = '',
   likes = 0
-}) => {
-  const splitTags = tags.split(', ');
+}: ImageCardProps) => {
   return (
     <div
       className="rounded overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition-all ease-in-out"
@@ -29,16 +35,6 @@ const ImageCard = ({
           </div>
         </div>
       </div>
-      {/* <div className="px-6 pt-4 pb-2 bg-white">
-        {splitTags.map(tag => (
-          <span
-            key={tag}
-            className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-          >
-            {tag}
-          </span>
-        ))}
-      </div> */}
     </div>
   );
 };

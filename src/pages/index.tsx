@@ -13,8 +13,8 @@ import NavBar from '@/components/NavBar/NavBar';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 
 import { fetchPixabay, scrollToTop } from '@/utils/helpers';
-import { useScrollHelpers } from '../utils/hooks';
-import { PixabayImage } from '@/utils/types';
+import { useScrollHelpers } from '@/utils/hooks';
+import { PixabayImage, PixabayMiddlewareResponse } from '@/utils/types';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -34,8 +34,14 @@ export default function Home() {
 
   const { isAtBottomOfPage, isScrolled } = useScrollHelpers();
 
+  // this useEffect helps detect when the user is at the bottom of the page and will attempt
+  // to load the next group of images
   useEffect(() => {
-    if (isAtBottomOfPage && !!query && !isFetching && lastUpdated + 1000 < Date.now()) {
+    const shouldFetchNextPage =
+      isAtBottomOfPage && !!query && !isFetching && lastUpdated + 1000 < Date.now();
+
+    if (shouldFetchNextPage) {
+      // if there is no nextPage, all images for that query from the API have been fetched
       if (!nextPage) {
         toast.info(
           `Reached end of image results for: "${query}". Displaying ${images.length} results.`,
@@ -46,6 +52,7 @@ export default function Home() {
         );
         return;
       }
+
       // fetch next page
       const callFetch = async () => {
         setIsFetching(true);
@@ -54,19 +61,9 @@ export default function Home() {
           currentPage: nextPage
         });
 
-        const {
-          currentPage: newCurrentPage,
-          previousPage: newPreviousPage,
-          nextPage: newNextPage,
-          images: newImages = [],
-          updatedAt
-        } = data || {};
+        // store new values in state after fetching
+        setSearchState({ data });
 
-        setCurrentPage(newCurrentPage);
-        setPreviousPage(newPreviousPage);
-        setNextPage(newNextPage);
-        setImages([...images, ...newImages]);
-        setLastUpdated(updatedAt);
         setIsFetching(false);
       };
 
@@ -78,6 +75,7 @@ export default function Home() {
     e.preventDefault();
 
     scrollToTop();
+
     // reset state
     setImages([]);
     setLastUpdated(0);
@@ -99,28 +97,39 @@ export default function Home() {
     setIsFetching(false);
 
     if (data) {
-      const {
-        query,
-        currentPage: newCurrentPage,
-        previousPage: newPreviousPage,
-        nextPage: newNextPage,
-        images,
-        updatedAt
-      } = data || {};
-
-      // update the state
-      setQuery(query);
-      setCurrentPage(newCurrentPage);
-      setPreviousPage(newPreviousPage);
-      setNextPage(newNextPage);
-      setLastUpdated(updatedAt);
-      setImages(images);
+      setSearchState({ data, isNewSearch: true });
     }
   };
 
   const handleImageClick = ({ image = {} }) => {
     setCurrentImage(image as PixabayImage);
     setIsModalOpen(true);
+  };
+
+  const setSearchState = ({
+    data,
+    isNewSearch = false
+  }: {
+    data: PixabayMiddlewareResponse;
+    isNewSearch?: boolean;
+  }) => {
+    const {
+      query,
+      currentPage: newCurrentPage,
+      previousPage: newPreviousPage,
+      nextPage: newNextPage,
+      images: newImages,
+      updatedAt
+    } = data || {};
+
+    const imagesArray = isNewSearch ? newImages : [...images, ...newImages];
+
+    setQuery(query);
+    setCurrentPage(newCurrentPage);
+    setPreviousPage(newPreviousPage);
+    setNextPage(newNextPage);
+    setLastUpdated(updatedAt);
+    setImages(imagesArray);
   };
 
   return (
@@ -135,8 +144,8 @@ export default function Home() {
       <main
         className={`flex min-h-screen flex-col items-center justify-start p-8 sm:p-24 ${inter.className} relative`}
       >
-        <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         <NavBar />
+        <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         <InputSubmitForm handleSubmit={handleSubmit} />
         <div className="w-auto">
           {!!lastUpdated && !images?.length && <p>No results found for &quot;{query}&quot;.</p>}
@@ -161,8 +170,8 @@ export default function Home() {
           image={currentImage}
           closeModal={() => setIsModalOpen(false)}
         />
+        <ScrollToTopButton />
       </main>
-      <ScrollToTopButton />
     </div>
   );
 }
