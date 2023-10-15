@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 import ImageModal from '@/components/ImageModal/ImageModal';
 import ImageCard from '@/components/ImageCard/ImageCard';
+import InputSubmitForm from '@/components/InputSubmitForm/InputSubmitForm';
 import NavBar from '@/components/NavBar/NavBar';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 
@@ -136,25 +137,7 @@ export default function Home() {
       >
         <Image src="/appstem-logo.png" width={296} height={48} alt="Appstem logo" />
         <NavBar />
-        <form
-          className="sticky top-5 flex-col items-center justify-center my-8 z-10"
-          onSubmit={handleSubmit}
-        >
-          <div className="flex items-center bg-white border-white-500 border-2 p-2 rounded-md focus-within:border-green-500  ease-in-out duration-200">
-            <input
-              className="appearance-none bg-transparent border-none w-full text-black mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray"
-              type="text"
-              placeholder="Search images..."
-              aria-label="Search images"
-            />
-            <button
-              className="flex-shrink-0 bg-green-500 hover:bg-green-700 border-green-500 hover:border-green-700 text-sm border-4 text-white py-1 px-2 rounded"
-              type="submit"
-            >
-              Search
-            </button>
-          </div>
-        </form>
+        <InputSubmitForm handleSubmit={handleSubmit} />
         <div className="w-auto">
           {!!lastUpdated && !images?.length && <p>No results found for &quot;{query}&quot;.</p>}
           {!images?.length ? null : (
