@@ -7,6 +7,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 import { ImageModal } from '@/components/ImageModal/ImageModal';
+import { ImageCard } from '@/components/ImageCard/ImageCard';
 
 import { fetchPixabay } from '@/utils/helpers';
 import { useScrollHelpers } from '../utils/hooks';
@@ -125,16 +126,16 @@ export default function Home() {
         </form>
         <div className="w-auto">
           {!images?.length ? null : (
-            <div className="grid gap-4 grid-cols-4 grid-rows-4">
+            <div className="grid gap-4 grid-cols-4 items-start">
               {images.map(img => (
-                <Image
-                  onClick={() => handleImageClick({ imageUrl: img.webformatURL })}
-                  className="cursor-pointer"
+                <ImageCard
                   key={img.id}
-                  src={img.webformatURL}
-                  alt={img.tags}
-                  width="300"
-                  height="300"
+                  handleClick={() => handleImageClick({ imageUrl: img.webformatURL })}
+                  imageURL={img.webformatURL}
+                  user={img.user}
+                  userImageURL={img.userImageURL}
+                  tags={img.tags}
+                  views={img.views}
                 />
               ))}
             </div>
